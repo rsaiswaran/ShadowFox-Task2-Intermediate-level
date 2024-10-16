@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flip Mart</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body style="background-image: url('background.jpg'); background-size: cover;">
+
+    <!-- Main Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <img src="flipmart logo.jpg" alt="Flip Mart Logo"> <!-- Add your logo path -->
+        </div>
+        <div class="search-container">
+            <input type="text" class="search-bar" placeholder="Search...">
+            <button class="search-btn">Search</button>
+        </div>
+        <div class="cart-btn">
+            <button onclick="showCart()">Cart <span id="cart-count">0</span></button>
+        </div>
+        <div class="login-btn" id="loginBtn">
+            <button onclick="openLoginModal()">Login</button>
+        </div>
+        <div class="welcome-message" id="welcomeMessage" style="display: none;"></div>
+    </nav>
+
+    <!-- Categories Navbar -->
+    <nav class="categories-navbar">
+        <ul>
+            <li><img src="electronics.jpg" alt="Electronics Icon"><span>Electronics</span></li>
+            <li><img src="fashion.jpg" alt="Fashion Icon"><span>Fashion</span></li>
+            <li><img src="mobiles.jpg" alt="Mobiles Icon"><span>Mobiles</span></li>
+            <li><img src="home and kitchen.jpg" alt="Home/Kitchen Icon"><span>Kitchen</span></li>
+            <li><img src="furniture.jpg" alt="Furniture Icon"><span>Furniture</span></li>
+            <li><img src="TV & Appliances.jpg" alt="TVs and Appliances Icon"><span>TVs & Appliances</span></li>
+            <li><img src="location.png" alt="Location Icon">
+                <span onclick="openAddressModal()" class="address-btn">Shipping Address</span>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Products Section -->
+    <section class="products-section">
+        <h1>Featured Products</h1>
+
+        <!-- Electronics Products -->
+        <div class="product-category">
+            <h3>Electronics</h3>
+            <div class="product-container">
+                <div class="product-card">
+                    <img src="smartphone.jpg" alt="Smartphone">
+                    <h3>Smartphone XYZ</h3>
+                    <p class="price">$499.99</p>
+                    <button class="add-to-cart-btn" onclick="addToCart('Smartphone XYZ', 499.99)">Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="laptop.jpg" alt="Laptop">
+                    <h3>Gaming Laptop</h3>
+                    <p class="price">$999.99</p>
+                    <button class="add-to-cart-btn" onclick="addToCart('Gaming Laptop', 999.99)">Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="smartwatch.jpg" alt="Smartwatch">
+                    <h3>Smartwatch ABC</h3>
+                    <p class="price">$199.99</p>
+                    <button class="add-to-cart-btn" onclick="addToCart('Smartwatch ABC', 199.99)">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fashion Products -->
+        <div class="product-category">
+            <h3>Fashion</h3>
+            <div class="product-container">
+                <div class="product-card">
+                    <img src="jacket.jpg" alt="Leather Jacket">
+                    <h3>Leather Jacket</h3>
+                    <p class="price">$149.99</p>
+                    <button class="add-to-cart-btn" onclick="addToCart('Leather Jacket', 149.99)">Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="sneakers.jpg" alt="Sneakers">
+                    <h3>Sport Sneakers</h3>
+                    <p class="price">$79.99</p>
+                    <button class="add-to-cart-btn" onclick="addToCart('Sport Sneakers', 79.99)">Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="tshirt.jpg" alt="T-Shirt">
+                    <h3>Graphic T-Shirt</h3>
+                    <p class="price">$19.99</p>
+                    <button class="add-to-cart-btn" onclick="addToCart('Graphic T-Shirt', 19.99)">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Home & Kitchen -->
+        <div class="product-category">
+            <h3>Home & Kitchen</h3>
+            <div class="product-container">
+                <div class="product-card">
+                    <img src="mixer.jpg" alt="Mixer">
+                    <h3>Kitchen Mixer</h3>
+                    <p class="price">$60.00</p>
+                    <button class="add-to-cart-btn" onclick="addToCart('Kitchen Mixer', 60.00)">Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="blender.jpg" alt="Blender">
+                    <h3>Blender Pro</h3>
+                    <p class="price">$70.00</p>
+                    <button class="add-to-cart-btn" onclick="addToCart('Blender Pro', 70.00)">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Furniture -->
+        <div class="product-category">
+            <h3>Furniture</h3>
+            <div class="product-container">
+                <div class="product-card">
+                    <img src="sofa.jpg" alt="Sofa">
+                    <h3>Modern Sofa</h3>
+                    <p class="price">$500.00</p>
+                    <button class="add-to-cart-btn" onclick="addToCart('Modern Sofa', 500.00)">Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="dining-table.jpg" alt="Dining Table">
+                    <h3>Dining Table Set</h3>
+                    <p class="price">$350.00</p>
+                    <button class="add-to-cart-btn" onclick="addToCart('Dining Table Set', 350.00)">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Modal -->
+    <div class="modal" id="cartModal">
+        <div class="modal-content">
+            <span class="close" onclick="closeCartModal()">&times;</span>
+            <h2>Your Cart</h2>
+            <div id="cartItems"></div>
+            <p>Total: $<span id="cartTotal">0.00</span></p>
+            <button onclick="showPaymentOptions()">Buy Now</button>
+        </div>
+    </div>
+
+   <!-- Payment Modal -->
+<div class="modal" id="paymentModal">
+    <div class="modal-content">
+        <span class="close" onclick="closePaymentModal()">&times;</span>
+        <h2>Payment Options</h2>
+        <form id="paymentForm" onsubmit="event.preventDefault(); processPayment();">
+            <div>s
+                <label for="cardNumber">Card Number:</label>
+                <input type="text" id="cardNumber" placeholder="Enter card number" required>
+            </div>
+            <div>
+                <label for="expiryDate">Expiry Date (MM/YY):</label>
+                <input type="text" id="expiryDate" placeholder="MM/YY" required>
+            </div>
+            <div>
+                <label for="cvv">CVV:</label>
+                <input type="text" id="cvv" placeholder="CVV" required>
+            </div>
+            <div>
+                <label>Payment Method:</label><br>
+                <input type="radio" name="paymentMethod" value="Credit Card" required> Credit Card<br>
+                <input type="radio" name="paymentMethod" value="Debit Card" required> Debit Card<br>
+                <input type="radio" name="paymentMethod" value="PayPal" required> PayPal<br>
+                <input type="radio" name="paymentMethod" value="Net Banking" required> Net Banking
+            </div>
+            <button type="submit">Proceed with Payment</button>
+        </form>
+    </div>
+</div>
+
+    <!-- Shipping Address Modal -->
+    <div class="modal" id="addressModal">
+        <div class="modal-content">
+            <span class="close" onclick="closeAddressModal()">&times;</span>
+            <h2>Enter Shipping Address</h2>
+            <form id="addressForm" onsubmit="event.preventDefault(); saveAddress();">
+                <div><input type="text" id="addressLine1" placeholder="Address Line 1" required></div>
+                <div><input type="text" id="addressLine2" placeholder="Address Line 2"></div>
+                <div><input type="text" id="city" placeholder="City" required></div>
+                <div><input type="text" id="state" placeholder="State" required></div>
+                <div><input type="text" id="zipCode" placeholder="Zip Code" required></div>
+                <button type="submit">Save Address</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <span class="close" onclick="closeLoginModal()">&times;</span>
+            <h2>Login / Register</h2>
+            <form id="authForm" onsubmit="event.preventDefault(); login();">
+                <div>
+                    <input type="text" id="username" placeholder="Full Name" required>
+                </div>
+                <div>
+                    <input type="email" id="email" placeholder="Email" required>
+                </div>
+                <div>
+                    <input type="password" id="password" placeholder="Password" required>
+                </div>
+                <button type="submit">Login / Register</button>
+            </form>
+            <p>Already have an account? <a href="#" onclick="showLogin()">Login</a></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
